@@ -63,7 +63,6 @@ outputs:
           then:
             - cf-nvidia-tools ==1
             - tar
-            - zstd
         - if: win
           then:
             - libarchive
@@ -112,7 +111,6 @@ outputs:
           then:
             - cf-nvidia-tools ==1
             - tar
-            - zstd
         - if: aarch64
           then: arm-variant * ${{ arm_variant_type }}
       host:
@@ -146,7 +144,6 @@ outputs:
           then:
             - cf-nvidia-tools ==1
             - tar
-            - zstd
         - if: win
           then:
             - libarchive
@@ -185,7 +182,6 @@ outputs:
           then:
             - cf-nvidia-tools ==1
             - tar
-            - zstd
         - if: win
           then:
             - libarchive
@@ -224,7 +220,6 @@ outputs:
           then:
             - cf-nvidia-tools ==1
             - tar
-            - zstd
         - if: win
           then:
             - libarchive
@@ -265,7 +260,6 @@ outputs:
           then:
             - cf-nvidia-tools ==1
             - tar
-            - zstd
         - if: win
           then:
             - libarchive
@@ -303,7 +297,6 @@ outputs:
           then:
             - cf-nvidia-tools ==1
             - tar
-            - zstd
         - if: win
           then:
             - libarchive
@@ -341,7 +334,6 @@ outputs:
           then:
             - cf-nvidia-tools ==1
             - tar
-            - zstd
         - if: win
           then:
             - libarchive
@@ -378,7 +370,6 @@ outputs:
           - if: linux
             then:
               - trtexec --help
-              - tensorrt_player --help
           - if: win
             then:
               - trtexec.exe --help
@@ -392,7 +383,6 @@ outputs:
         - if: linux
           then:
             - tar
-            - zstd
         - if: win
           then:
             - libarchive
@@ -420,7 +410,6 @@ outputs:
         - if: linux
           then:
             - tar
-            - zstd
         - if: win
           then:
             - libarchive
@@ -453,7 +442,6 @@ outputs:
         - if: linux
           then:
             - tar
-            - zstd
         - if: win
           then:
             - libarchive
@@ -484,7 +472,6 @@ outputs:
         - if: linux
           then:
             - tar
-            - zstd
         - if: win
           then:
             - libarchive
@@ -515,7 +502,6 @@ outputs:
         - if: linux
           then:
             - tar
-            - zstd
         - if: win
           then:
             - libarchive
@@ -546,7 +532,6 @@ outputs:
         - if: linux
           then:
             - tar
-            - zstd
         - if: win
           then:
             - libarchive
@@ -577,7 +562,6 @@ outputs:
         - if: linux
           then:
             - tar
-            - zstd
         - if: win
           then:
             - libarchive
