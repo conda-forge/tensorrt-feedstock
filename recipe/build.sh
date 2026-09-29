@@ -2,6 +2,12 @@
 
 set -euxo pipefail
 
+# Globs of libraries with CUDA device code to verify with check-cuda-arch. Outputs
+# without device code leave this empty.
+arch_libs=()
+# Set to true to log check-cuda-arch results without failing the build.
+arch_report_only=false
+
 case "${PKG_NAME}" in
   libnvinfer-headers)
     tar -xzf tensorrt.tar.gz --strip-components=1 --wildcards \
@@ -41,6 +47,10 @@ case "${PKG_NAME}" in
       '*/lib/libnvinfer_builder_resource_ptx.so.*'
       '*/lib/libnvinfer_builder_resource_sm*.so.*'
     )
+    # The builder_resource libraries contain no device code.
+    arch_libs=('lib/libnvinfer.so.*')
+    # TODO: Enforce once upstream drops the stray compute_52 PTX
+    arch_report_only=true
     ;;
   libnvinfer-win-builder-resource)
     files=('*/lib/libnvinfer_builder_resource_win_*.so.*')
@@ -50,12 +60,17 @@ case "${PKG_NAME}" in
     ;;
   libnvinfer-lean)
     files=('*/lib/libnvinfer_lean.so.*')
+    arch_libs=('lib/libnvinfer_lean.so.*')
+    # TODO: Enforce once upstream drops the stray compute_52 PTX
+    arch_report_only=true
     ;;
   libnvinfer-plugin)
     files=('*/lib/libnvinfer_plugin.so.*')
+    arch_libs=('lib/libnvinfer_plugin.so.*')
     ;;
   libnvinfer-vc-plugin)
     files=('*/lib/libnvinfer_vc_plugin.so.*')
+    arch_libs=('lib/libnvinfer_vc_plugin.so.*')
     ;;
   libnvonnxparser)
     files=('*/lib/libnvonnxparser.so.*')
@@ -75,6 +90,15 @@ rm -f tensorrt.tar.gz
 mkdir -p "${PREFIX}/lib"
 if compgen -G 'lib/*.so.*' > /dev/null; then
   check-glibc lib/*.so.*
+  if (( ${#arch_libs[@]} > 0 )); then
+    arch_files=()
+    # Expand the globs here, after extraction, and skip symlinks to the same library.
+    # shellcheck disable=SC2068
+    for f in ${arch_libs[@]}; do
+      [[ -L "${f}" ]] || arch_files+=("${f}")
+    done
+    check-cuda-arch "${arch_files[@]}" || [[ "${arch_report_only}" == true ]]
+  fi
   mv -v lib/*.so.* "${PREFIX}/lib/"
 fi
 if compgen -G 'lib/*.so' > /dev/null; then

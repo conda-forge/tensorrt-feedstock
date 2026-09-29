@@ -60,9 +60,9 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
+        - cf-nvidia-tools >=1.1,<2
         - if: linux
           then:
-            - cf-nvidia-tools ==1
             - tar
         - if: win
           then:
@@ -71,6 +71,7 @@ outputs:
           then: arm-variant * ${{ arm_variant_type }}
       host:
         - cuda-version ==${{ cuda_compiler_version }}
+        - cuda-arch ==${{ cuda_arch_version }}
       run:
         - ${{ pin_compatible("cuda-version", lower_bound="x", upper_bound="x") }}
         - cuda-cudart
@@ -110,7 +111,7 @@ outputs:
         - ${{ stdlib("c") }}
         - if: linux
           then:
-            - cf-nvidia-tools ==1
+            - cf-nvidia-tools >=1.1,<2
             - tar
         - if: aarch64
           then: arm-variant * ${{ arm_variant_type }}
@@ -143,7 +144,7 @@ outputs:
         - ${{ stdlib("c") }}
         - if: linux
           then:
-            - cf-nvidia-tools ==1
+            - cf-nvidia-tools >=1.1,<2
             - tar
         - if: win
           then:
@@ -179,9 +180,9 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
+        - cf-nvidia-tools >=1.1,<2
         - if: linux
           then:
-            - cf-nvidia-tools ==1
             - tar
         - if: win
           then:
@@ -190,6 +191,7 @@ outputs:
           then: arm-variant * ${{ arm_variant_type }}
       host:
         - cuda-version ==${{ cuda_compiler_version }}
+        - cuda-arch ==${{ cuda_arch_version }}
       run:
         - ${{ pin_compatible("cuda-version", lower_bound="x", upper_bound="x") }}
         - cuda-cudart
@@ -217,9 +219,9 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
+        - cf-nvidia-tools >=1.1,<2
         - if: linux
           then:
-            - cf-nvidia-tools ==1
             - tar
         - if: win
           then:
@@ -228,6 +230,7 @@ outputs:
           then: arm-variant * ${{ arm_variant_type }}
       host:
         - cuda-version ==${{ cuda_compiler_version }}
+        - cuda-arch ==${{ cuda_arch_version }}
         - ${{ pin_subpackage("libnvinfer", exact=True) }}
       run:
         - ${{ pin_compatible("cuda-version", lower_bound="x", upper_bound="x") }}
@@ -257,9 +260,9 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
+        - cf-nvidia-tools >=1.1,<2
         - if: linux
           then:
-            - cf-nvidia-tools ==1
             - tar
         - if: win
           then:
@@ -268,6 +271,7 @@ outputs:
           then: arm-variant * ${{ arm_variant_type }}
       host:
         - cuda-version ==${{ cuda_compiler_version }}
+        - cuda-arch ==${{ cuda_arch_version }}
       run:
         - ${{ pin_compatible("cuda-version", lower_bound="x", upper_bound="x") }}
       run_constraints:
@@ -296,7 +300,7 @@ outputs:
         - ${{ stdlib("c") }}
         - if: linux
           then:
-            - cf-nvidia-tools ==1
+            - cf-nvidia-tools >=1.1,<2
             - tar
         - if: win
           then:
@@ -333,7 +337,7 @@ outputs:
         - ${{ stdlib("c") }}
         - if: linux
           then:
-            - cf-nvidia-tools ==1
+            - cf-nvidia-tools >=1.1,<2
             - tar
         - if: win
           then:

@@ -10,3 +10,5 @@ github_actions_labels:       # [linux or win]
 - depot-ubuntu-24.04-8       # [linux and x86_64]
 - depot-ubuntu-24.04-arm-8   # [linux and aarch64]
 - depot-windows-2025-8       # [win]
+cuda_arch_version:
+  - 7.5
