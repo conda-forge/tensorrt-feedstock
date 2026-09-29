@@ -55,6 +55,7 @@ if "%PKG_NAME%"=="libnvinfer" set "TRT_ARCH_REPORT_ONLY=1"
 if "%PKG_NAME%"=="libnvinfer-lean" set "TRT_ARCH_REPORT_ONLY=1"
 if "%PKG_NAME%"=="libnvinfer-plugin" set "TRT_ARCH_PATTERN=bin\nvinfer_plugin_*.dll"
 if "%PKG_NAME%"=="libnvinfer-vc-plugin" set "TRT_ARCH_PATTERN=bin\nvinfer_vc_plugin_*.dll"
+if "%PKG_NAME%"=="tensorrt-tools" set "TRT_ARCH_PATTERN=bin\trtexec.exe"
 if defined TRT_ARCH_PATTERN (
   check-cuda-arch %TRT_ARCH_PATTERN%
   if errorlevel 1 if not defined TRT_ARCH_REPORT_ONLY exit /b 1

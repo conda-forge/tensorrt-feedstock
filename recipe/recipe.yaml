@@ -334,10 +334,11 @@ outputs:
       build:
         - ${{ compiler("c") }}
         - ${{ compiler("cxx") }}
+        - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
+        - cf-nvidia-tools >=1.1,<2
         - if: linux
           then:
-            - cf-nvidia-tools >=1.1,<2
             - tar
         - if: win
           then:
@@ -346,6 +347,7 @@ outputs:
           then: arm-variant * ${{ arm_variant_type }}
       host:
         - cuda-version ==${{ cuda_compiler_version }}
+        - cuda-arch ==${{ cuda_arch_version }}
         - ${{ pin_subpackage("libnvinfer", exact=True) }}
         - ${{ pin_subpackage("libnvinfer-plugin", exact=True) }}
         - ${{ pin_subpackage("libnvonnxparser", exact=True) }}

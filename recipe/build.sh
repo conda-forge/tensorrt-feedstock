@@ -25,6 +25,7 @@ case "${PKG_NAME}" in
     ;;
   tensorrt-tools)
     files=('*/bin/trtexec' '*/bin/tensorrt_player')
+    arch_libs=('bin/trtexec')
     ;;
   libnvinfer-dispatch-devel)
     files=('*/lib/libnvinfer_dispatch.so')
@@ -87,18 +88,19 @@ tar -xzf tensorrt.tar.gz --strip-components=1 --wildcards \
   '*/doc/Acknowledgements.txt'
 rm -f tensorrt.tar.gz
 
+if (( ${#arch_libs[@]} > 0 )); then
+  arch_files=()
+  # Expand the globs here, after extraction, and skip symlinks to the same library.
+  # shellcheck disable=SC2068
+  for f in ${arch_libs[@]}; do
+    [[ -L "${f}" ]] || arch_files+=("${f}")
+  done
+  check-cuda-arch "${arch_files[@]}" || [[ "${arch_report_only}" == true ]]
+fi
+
 mkdir -p "${PREFIX}/lib"
 if compgen -G 'lib/*.so.*' > /dev/null; then
   check-glibc lib/*.so.*
-  if (( ${#arch_libs[@]} > 0 )); then
-    arch_files=()
-    # Expand the globs here, after extraction, and skip symlinks to the same library.
-    # shellcheck disable=SC2068
-    for f in ${arch_libs[@]}; do
-      [[ -L "${f}" ]] || arch_files+=("${f}")
-    done
-    check-cuda-arch "${arch_files[@]}" || [[ "${arch_report_only}" == true ]]
-  fi
   mv -v lib/*.so.* "${PREFIX}/lib/"
 fi
 if compgen -G 'lib/*.so' > /dev/null; then
