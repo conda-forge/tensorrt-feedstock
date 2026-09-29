@@ -4,12 +4,12 @@ set -euxo pipefail
 
 case "${PKG_NAME}" in
   libnvinfer-headers)
-    tar --zstd -xf tensorrt.tar.zst --strip-components=1 --wildcards \
+    tar -xzf tensorrt.tar.gz --strip-components=1 --wildcards \
       '*/include/NvInfer*' \
       '*/include/NvOnnx*' \
       '*/doc/README.txt' \
       '*/doc/Acknowledgements.txt'
-    rm -f tensorrt.tar.zst
+    rm -f tensorrt.tar.gz
     mkdir -p "${PREFIX}/include"
     mv -v include/NvInfer* include/NvOnnx* "${PREFIX}/include/"
     exit 0
@@ -66,11 +66,11 @@ case "${PKG_NAME}" in
     ;;
 esac
 
-tar --zstd -xf tensorrt.tar.zst --strip-components=1 --wildcards \
+tar -xzf tensorrt.tar.gz --strip-components=1 --wildcards \
   "${files[@]}" \
   '*/doc/README.txt' \
   '*/doc/Acknowledgements.txt'
-rm -f tensorrt.tar.zst
+rm -f tensorrt.tar.gz
 
 mkdir -p "${PREFIX}/lib"
 if compgen -G 'lib/*.so.*' > /dev/null; then
