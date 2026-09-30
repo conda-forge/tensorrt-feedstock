@@ -43,6 +43,19 @@ bsdtar -xf tensorrt.zip --strip-components 1 "%TRT_PATTERN%" "*/doc/README.txt" 
 if errorlevel 1 exit /b 1
 
 del /Q tensorrt.zip
+
+@rem Globs of libraries with CUDA device code to verify with check-cuda-arch
+set "TRT_ARCH_PATTERN="
+if "%PKG_NAME%"=="libnvinfer" set "TRT_ARCH_PATTERN=bin\nvinfer_[0123456789]*.dll"
+if "%PKG_NAME%"=="libnvinfer-lean" set "TRT_ARCH_PATTERN=bin\nvinfer_lean_*.dll"
+if "%PKG_NAME%"=="libnvinfer-plugin" set "TRT_ARCH_PATTERN=bin\nvinfer_plugin_*.dll"
+if "%PKG_NAME%"=="libnvinfer-vc-plugin" set "TRT_ARCH_PATTERN=bin\nvinfer_vc_plugin_*.dll"
+if "%PKG_NAME%"=="tensorrt-tools" set "TRT_ARCH_PATTERN=bin\trtexec.exe"
+if defined TRT_ARCH_PATTERN (
+  check-cuda-arch %TRT_ARCH_PATTERN%
+  if errorlevel 1 exit /b 1
+)
+
 if exist bin\*.dll (
   if not exist "%LIBRARY_BIN%" mkdir "%LIBRARY_BIN%"
   move /Y bin\*.dll "%LIBRARY_BIN%"

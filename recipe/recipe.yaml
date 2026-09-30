@@ -35,7 +35,7 @@ source:
       sha256: 3fa5add88aec4227bcb8fa391fa3e2ccdfc9da6c51bc988908b11497294233d5
 
 build:
-  number: 1
+  number: 2
   script:
     - if: win
       then: call "%RECIPE_DIR%\build.bat"
@@ -59,9 +59,9 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
+        - cf-nvidia-tools >=1.1.1,<2
         - if: linux
           then:
-            - cf-nvidia-tools ==1
             - tar
             - zstd
         - if: win
@@ -71,6 +71,7 @@ outputs:
           then: arm-variant * ${{ arm_variant_type }}
       host:
         - cuda-version ==${{ cuda_compiler_version }}
+        - cuda-arch ==${{ cuda_arch_version }}
       run:
         - ${{ pin_compatible("cuda-version", lower_bound="x", upper_bound="x") }}
         - cuda-cudart
@@ -110,7 +111,7 @@ outputs:
         - ${{ stdlib("c") }}
         - if: linux
           then:
-            - cf-nvidia-tools ==1
+            - cf-nvidia-tools >=1.1.1,<2
             - tar
             - zstd
         - if: aarch64
@@ -144,7 +145,7 @@ outputs:
         - ${{ stdlib("c") }}
         - if: linux
           then:
-            - cf-nvidia-tools ==1
+            - cf-nvidia-tools >=1.1.1,<2
             - tar
             - zstd
         - if: win
@@ -181,9 +182,9 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
+        - cf-nvidia-tools >=1.1.1,<2
         - if: linux
           then:
-            - cf-nvidia-tools ==1
             - tar
             - zstd
         - if: win
@@ -193,6 +194,7 @@ outputs:
           then: arm-variant * ${{ arm_variant_type }}
       host:
         - cuda-version ==${{ cuda_compiler_version }}
+        - cuda-arch ==${{ cuda_arch_version }}
       run:
         - ${{ pin_compatible("cuda-version", lower_bound="x", upper_bound="x") }}
         - cuda-cudart
@@ -220,9 +222,9 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
+        - cf-nvidia-tools >=1.1.1,<2
         - if: linux
           then:
-            - cf-nvidia-tools ==1
             - tar
             - zstd
         - if: win
@@ -232,6 +234,7 @@ outputs:
           then: arm-variant * ${{ arm_variant_type }}
       host:
         - cuda-version ==${{ cuda_compiler_version }}
+        - cuda-arch ==${{ cuda_arch_version }}
         - ${{ pin_subpackage("libnvinfer", exact=True) }}
       run:
         - ${{ pin_compatible("cuda-version", lower_bound="x", upper_bound="x") }}
@@ -261,9 +264,9 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
+        - cf-nvidia-tools >=1.1.1,<2
         - if: linux
           then:
-            - cf-nvidia-tools ==1
             - tar
             - zstd
         - if: win
@@ -273,6 +276,7 @@ outputs:
           then: arm-variant * ${{ arm_variant_type }}
       host:
         - cuda-version ==${{ cuda_compiler_version }}
+        - cuda-arch ==${{ cuda_arch_version }}
       run:
         - ${{ pin_compatible("cuda-version", lower_bound="x", upper_bound="x") }}
       run_constraints:
@@ -301,7 +305,7 @@ outputs:
         - ${{ stdlib("c") }}
         - if: linux
           then:
-            - cf-nvidia-tools ==1
+            - cf-nvidia-tools >=1.1.1,<2
             - tar
             - zstd
         - if: win
@@ -336,10 +340,11 @@ outputs:
       build:
         - ${{ compiler("c") }}
         - ${{ compiler("cxx") }}
+        - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
+        - cf-nvidia-tools >=1.1.1,<2
         - if: linux
           then:
-            - cf-nvidia-tools ==1
             - tar
             - zstd
         - if: win
@@ -349,6 +354,7 @@ outputs:
           then: arm-variant * ${{ arm_variant_type }}
       host:
         - cuda-version ==${{ cuda_compiler_version }}
+        - cuda-arch ==${{ cuda_arch_version }}
         - ${{ pin_subpackage("libnvinfer", exact=True) }}
         - ${{ pin_subpackage("libnvinfer-plugin", exact=True) }}
         - ${{ pin_subpackage("libnvonnxparser", exact=True) }}
