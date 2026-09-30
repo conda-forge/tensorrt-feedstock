@@ -60,7 +60,7 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
-        - cf-nvidia-tools >=1.1,<2
+        - cf-nvidia-tools >=1.1.1,<2
         - if: linux
           then:
             - tar
@@ -111,7 +111,7 @@ outputs:
         - ${{ stdlib("c") }}
         - if: linux
           then:
-            - cf-nvidia-tools >=1.1,<2
+            - cf-nvidia-tools >=1.1.1,<2
             - tar
         - if: aarch64
           then: arm-variant * ${{ arm_variant_type }}
@@ -144,7 +144,7 @@ outputs:
         - ${{ stdlib("c") }}
         - if: linux
           then:
-            - cf-nvidia-tools >=1.1,<2
+            - cf-nvidia-tools >=1.1.1,<2
             - tar
         - if: win
           then:
@@ -180,7 +180,7 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
-        - cf-nvidia-tools >=1.1,<2
+        - cf-nvidia-tools >=1.1.1,<2
         - if: linux
           then:
             - tar
@@ -219,7 +219,7 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
-        - cf-nvidia-tools >=1.1,<2
+        - cf-nvidia-tools >=1.1.1,<2
         - if: linux
           then:
             - tar
@@ -260,7 +260,7 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
-        - cf-nvidia-tools >=1.1,<2
+        - cf-nvidia-tools >=1.1.1,<2
         - if: linux
           then:
             - tar
@@ -300,7 +300,7 @@ outputs:
         - ${{ stdlib("c") }}
         - if: linux
           then:
-            - cf-nvidia-tools >=1.1,<2
+            - cf-nvidia-tools >=1.1.1,<2
             - tar
         - if: win
           then:
@@ -336,7 +336,7 @@ outputs:
         - ${{ compiler("cxx") }}
         - ${{ compiler("cuda") }}
         - ${{ stdlib("c") }}
-        - cf-nvidia-tools >=1.1,<2
+        - cf-nvidia-tools >=1.1.1,<2
         - if: linux
           then:
             - tar

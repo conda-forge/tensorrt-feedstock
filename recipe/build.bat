@@ -46,19 +46,14 @@ del /Q tensorrt.zip
 
 @rem Globs of libraries with CUDA device code to verify with check-cuda-arch
 set "TRT_ARCH_PATTERN="
-@rem Set TRT_ARCH_REPORT_ONLY to log check-cuda-arch results without failing the build
-set "TRT_ARCH_REPORT_ONLY="
 if "%PKG_NAME%"=="libnvinfer" set "TRT_ARCH_PATTERN=bin\nvinfer_[0123456789]*.dll"
 if "%PKG_NAME%"=="libnvinfer-lean" set "TRT_ARCH_PATTERN=bin\nvinfer_lean_*.dll"
-@rem TODO: Enforce once upstream drops the stray compute_52 PTX
-if "%PKG_NAME%"=="libnvinfer" set "TRT_ARCH_REPORT_ONLY=1"
-if "%PKG_NAME%"=="libnvinfer-lean" set "TRT_ARCH_REPORT_ONLY=1"
 if "%PKG_NAME%"=="libnvinfer-plugin" set "TRT_ARCH_PATTERN=bin\nvinfer_plugin_*.dll"
 if "%PKG_NAME%"=="libnvinfer-vc-plugin" set "TRT_ARCH_PATTERN=bin\nvinfer_vc_plugin_*.dll"
 if "%PKG_NAME%"=="tensorrt-tools" set "TRT_ARCH_PATTERN=bin\trtexec.exe"
 if defined TRT_ARCH_PATTERN (
   check-cuda-arch %TRT_ARCH_PATTERN%
-  if errorlevel 1 if not defined TRT_ARCH_REPORT_ONLY exit /b 1
+  if errorlevel 1 exit /b 1
 )
 
 if exist bin\*.dll (
