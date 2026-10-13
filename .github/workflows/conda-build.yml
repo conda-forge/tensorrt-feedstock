@@ -34,7 +34,7 @@ jobs:
             resize_partitions: False
             runs_on: ['depot-ubuntu-24.04-8']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_64_cuda_compiler_version13.0
+          - CONFIG: linux_64_cuda_compiler_version13.4
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -46,7 +46,7 @@ jobs:
             resize_partitions: False
             runs_on: ['depot-ubuntu-24.04-8']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_aarch64_cuda_compiler_version13.0
+          - CONFIG: linux_aarch64_cuda_compiler_version13.4
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -70,7 +70,7 @@ jobs:
             resize_partitions: False
             runs_on: ['depot-windows-2025-8']
             tools_install_dir: C:\Miniforge
-          - CONFIG: win_64_cuda_compiler_version13.0
+          - CONFIG: win_64_cuda_compiler_version13.4
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             build_platform: win-64
