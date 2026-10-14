@@ -2,6 +2,10 @@
 
 set -euxo pipefail
 
+# Globs of libraries with CUDA device code to verify with check-cuda-arch. Outputs
+# without device code leave this empty.
+arch_libs=()
+
 case "${PKG_NAME}" in
   libnvinfer-headers)
     tar -xzf tensorrt.tar.gz --strip-components=1 --wildcards \
@@ -41,6 +45,8 @@ case "${PKG_NAME}" in
       '*/lib/libnvinfer_builder_resource_ptx.so.*'
       '*/lib/libnvinfer_builder_resource_sm*.so.*'
     )
+    # cuobjdump cannot see the device code embedded in the builder_resource libraries.
+    arch_libs=('lib/libnvinfer.so.*')
     ;;
   libnvinfer-win-builder-resource)
     files=('*/lib/libnvinfer_builder_resource_win_*.so.*')
@@ -50,12 +56,15 @@ case "${PKG_NAME}" in
     ;;
   libnvinfer-lean)
     files=('*/lib/libnvinfer_lean.so.*')
+    arch_libs=('lib/libnvinfer_lean.so.*')
     ;;
   libnvinfer-plugin)
     files=('*/lib/libnvinfer_plugin.so.*')
+    arch_libs=('lib/libnvinfer_plugin.so.*')
     ;;
   libnvinfer-vc-plugin)
     files=('*/lib/libnvinfer_vc_plugin.so.*')
+    arch_libs=('lib/libnvinfer_vc_plugin.so.*')
     ;;
   libnvonnxparser)
     files=('*/lib/libnvonnxparser.so.*')
@@ -71,6 +80,16 @@ tar -xzf tensorrt.tar.gz --strip-components=1 --wildcards \
   '*/doc/README.txt' \
   '*/doc/Acknowledgements.txt'
 rm -f tensorrt.tar.gz
+
+if (( ${#arch_libs[@]} > 0 )); then
+  arch_files=()
+  # Expand the globs here, after extraction, and skip symlinks to the same library.
+  # shellcheck disable=SC2068
+  for f in ${arch_libs[@]}; do
+    [[ -L "${f}" ]] || arch_files+=("${f}")
+  done
+  check-cuda-arch "${arch_files[@]}"
+fi
 
 mkdir -p "${PREFIX}/lib"
 if compgen -G 'lib/*.so.*' > /dev/null; then
