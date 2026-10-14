@@ -23,7 +23,6 @@ case "${PKG_NAME}" in
     ;;
   tensorrt-tools)
     files=('*/bin/trtexec' '*/bin/tensorrt_player')
-    arch_libs=('bin/trtexec')
     ;;
   libnvinfer-dispatch-devel)
     files=('*/lib/libnvinfer_dispatch.so')
