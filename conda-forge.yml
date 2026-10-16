@@ -1,17 +1,19 @@
-conda_build_tool: rattler-build
-workflow_settings:
-  free_disk_space: max
-github:
-  branch_name: main
-  tooling_branch_name: main
+build_platform:
+  osx_arm64: osx_arm64
 conda_build:
   error_overlinking: true
   pkg_format: '2'
-  # Highest compression is 22. Increased compression to prevent timeout issue when
-  # uploading packages. (Smaller package; less upload time)
   zstd_compression_level: 22
+conda_build_tool: rattler-build
 conda_forge_output_validation: true
+github:
+  branch_name: main
+  tooling_branch_name: main
 provider:
   linux_64: github_actions
   linux_aarch64: github_actions
+  osx_arm64: default
   win: github_actions
+test: native_and_emulated
+workflow_settings:
+  free_disk_space: max
