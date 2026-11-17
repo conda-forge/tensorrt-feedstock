@@ -1,6 +1,6 @@
 context:
-  full_version: "11.4.0.106"
-  version: "11.4.0"
+  full_version: "11.5.0.63"
+  version: "11.5.0"
   soname: "11"
 
 recipe:
@@ -12,27 +12,27 @@ source:
     then:
       url: https://developer.download.nvidia.com/compute/machine-learning/tensorrt/${{ version }}/tars/TensorRT-Enterprise-${{ full_version }}-Linux-x86_64-cuda-12.9-Release-external.tar.zst
       file_name: tensorrt.tar.zst
-      sha256: 6588d211dec2f254b1fc78cce581aadcf4ff29ecbbee770e16085ace93b57a60
+      sha256: 12cde91af7f94579a99c1d3ecd6b0176870b0fc21628ea735010760df09d809e
   - if: linux and x86_64 and match(cuda_compiler_version, ">=13,<14")
     then:
-      url: https://developer.download.nvidia.com/compute/machine-learning/tensorrt/${{ version }}/tars/TensorRT-Enterprise-${{ full_version }}-Linux-x86_64-cuda-13.4-Release-external.tar.zst
+      url: https://developer.download.nvidia.com/compute/machine-learning/tensorrt/${{ version }}/tars/TensorRT-Enterprise-${{ full_version }}-Linux-x86_64-cuda-13.5-Release-external.tar.zst
       file_name: tensorrt.tar.zst
-      sha256: c67c87674cbe7b2337d1c30cb16d48686ab79ecb11bf08cb764b71f4f2bb711b
+      sha256: ebeaadd0e259e461c2c39d21ca8232f6a575241006eb0d93050e38d6b324d7bc
   - if: linux and aarch64 and match(cuda_compiler_version, ">=13,<14") and arm_variant_type == "sbsa"
     then:
-      url: https://developer.download.nvidia.com/compute/machine-learning/tensorrt/${{ version }}/tars/TensorRT-Enterprise-${{ full_version }}-Linux-aarch64-cuda-13.4-Release-external.tar.zst
+      url: https://developer.download.nvidia.com/compute/machine-learning/tensorrt/${{ version }}/tars/TensorRT-Enterprise-${{ full_version }}-Linux-aarch64-cuda-13.5-Release-external.tar.zst
       file_name: tensorrt.tar.zst
-      sha256: 00c1b478555df9830bdc72a950b4d8b482715e691ac3627e66b66f7b6a712077
+      sha256: 4b7eb62dafa5eb336d0f160d79107801260535760f60f7736990f60cf74d719d
   - if: win and x86_64 and match(cuda_compiler_version, ">=12,<13")
     then:
       url: https://developer.download.nvidia.com/compute/machine-learning/tensorrt/${{ version }}/zip/TensorRT-Enterprise-${{ full_version }}-Windows-amd64-cuda-12.9-Release-external.zip
       file_name: tensorrt.zip
-      sha256: 82d29828ff7611b90f524cc13d45e56c752a6f4a3d223b07275012d0a2047bdc
+      sha256: b1da0e00c772f7f1cea9b4c39e486e9fb07f33dacc17068ab54194ddc4701dac
   - if: win and x86_64 and match(cuda_compiler_version, ">=13,<14")
     then:
-      url: https://developer.download.nvidia.com/compute/machine-learning/tensorrt/${{ version }}/zip/TensorRT-Enterprise-${{ full_version }}-Windows-amd64-cuda-13.4-Release-external.zip
+      url: https://developer.download.nvidia.com/compute/machine-learning/tensorrt/${{ version }}/zip/TensorRT-Enterprise-${{ full_version }}-Windows-amd64-cuda-13.5-Release-external.zip
       file_name: tensorrt.zip
-      sha256: b6fd86301ad803492adf7a06de29ce45e3968d29637a1437d0fb0994f412c980
+      sha256: 802faa3ca9ca15715b41b5057b8c85a906a26515f64eed410b596b376e2fa9da
 
 build:
   number: 0
